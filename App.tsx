@@ -19,6 +19,8 @@ const App: React.FC = () => {
   const [companyInfo, setCompanyInfo] = useState<CompanyInfo>(INITIAL_COMPANY_INFO);
   const [isInitialized, setIsInitialized] = useState(false);
 
+  // 페이지(view)가 바뀔 때마다 DB에서 최신 정보를 다시 불러옵니다.
+  // 이를 통해 관리자에서 수정한 내용이 즉시 반영되지 않는 문제를 해결합니다.
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -38,7 +40,7 @@ const App: React.FC = () => {
       }
     };
     loadData();
-  }, []);
+  }, [view]);
 
   const handleNavigate = (newView: PageView, filter?: string) => {
     setView(newView);
@@ -87,12 +89,14 @@ const App: React.FC = () => {
 
       {view === 'home' && isInitialized && (
         <div className="hidden md:flex fixed right-8 top-1/2 -translate-y-1/2 z-30 flex-col gap-4">
-          {[...Array(sections.length + 1)].map((_, i) => (
+          {sections.map((_, i) => (
             <div 
               key={i} 
               className="w-1.5 h-1.5 rounded-full bg-white/30 hover:bg-white transition-colors cursor-pointer shadow-lg"
             />
           ))}
+          {/* Footer용 포인트 추가 */}
+          <div className="w-1.5 h-1.5 rounded-full bg-white/30 hover:bg-white transition-colors cursor-pointer shadow-lg" />
         </div>
       )}
     </div>
