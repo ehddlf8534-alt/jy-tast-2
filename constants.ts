@@ -1,5 +1,5 @@
 
-import { SectionData, MenuItem, CompanyInfo, AboutData } from './types';
+import { SectionData, MenuItem, CompanyInfo, AboutData } from './types.ts';
 
 export const INITIAL_COMPANY_INFO: CompanyInfo = {
   name: "JYDESIGN (제이와이디자인)",

@@ -1,15 +1,14 @@
 
 import React, { useState } from 'react';
 import { Menu, X, Instagram } from 'lucide-react';
-import { MENU_ITEMS } from '../constants';
-import { PageView } from '../types';
+import { MENU_ITEMS } from '../constants.ts';
+import { PageView } from '../types.ts';
 
 interface SidebarProps {
   onNavigate: (view: PageView, filter?: string) => void;
   currentView: PageView;
 }
 
-// 네이버 공식 스타일 'N' 로고 (더 직관적이고 깔끔한 버전)
 const NaverBlogIcon = ({ size = 20 }: { size?: number }) => (
   <svg 
     width={size} 
@@ -26,7 +25,6 @@ const NaverBlogIcon = ({ size = 20 }: { size?: number }) => (
   </svg>
 );
 
-// 핀터레스트 아이콘 (브랜드 아이덴티티 강조)
 const PinterestIcon = ({ size = 20 }: { size?: number }) => (
   <svg 
     width={size} 
@@ -50,7 +48,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate, currentView }) => {
 
   return (
     <>
-      {/* 좌측 세로 바 */}
       <div className="fixed top-0 left-0 z-50 p-6 flex items-center justify-between w-full md:w-auto md:h-full md:flex-col md:bg-white/10 md:backdrop-blur-md md:hover:bg-white/30 transition-all duration-500">
         <div 
           className="text-2xl font-black tracking-tighter text-white drop-shadow-lg md:text-black md:drop-shadow-none mb-0 md:mb-12 cursor-pointer transition-all hover:scale-105" 
@@ -68,38 +65,13 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate, currentView }) => {
 
         <div className="hidden md:flex flex-col gap-8 mt-auto mb-6">
           <div className="flex flex-col gap-8 text-black/40 items-center">
-            <a 
-              href="https://instagram.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-pink-500 transition-all hover:scale-110"
-              aria-label="Instagram"
-            >
-              <Instagram size={22} />
-            </a>
-            <a 
-              href="https://blog.naver.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-[#03C75A] transition-all hover:scale-110"
-              aria-label="Naver Blog"
-            >
-              <NaverBlogIcon size={22} />
-            </a>
-            <a 
-              href="https://pinterest.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-[#E60023] transition-all hover:scale-110"
-              aria-label="Pinterest"
-            >
-              <PinterestIcon size={24} />
-            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-all hover:scale-110"><Instagram size={22} /></a>
+            <a href="https://blog.naver.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#03C75A] transition-all hover:scale-110"><NaverBlogIcon size={22} /></a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#E60023] transition-all hover:scale-110"><PinterestIcon size={24} /></a>
           </div>
         </div>
       </div>
 
-      {/* 전체 메뉴 오버레이 */}
       <div className={`fixed inset-0 z-40 bg-white/70 backdrop-blur-3xl transition-all duration-700 ease-in-out transform ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
         <div className="flex flex-col h-full p-12 md:pl-48">
           <nav className="mt-12 space-y-8">
@@ -133,7 +105,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate, currentView }) => {
               </div>
             ))}
           </nav>
-
           <div className="mt-auto pt-12 text-sm text-black/30 font-medium tracking-widest uppercase">
             <p className="animate-pulse">Trust in Excellence. Design for Life.</p>
             <p className="mt-4">© JYDESIGN. All rights reserved.</p>

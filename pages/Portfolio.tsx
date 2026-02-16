@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight, Maximize2, Filter, ArrowLeft } from 'lucide-react';
-import { PortfolioProject } from '../types';
-import * as db from '../db';
+import { PortfolioProject } from '../types.ts';
+import * as db from '../db.ts';
 
 const INITIAL_PROJECTS: PortfolioProject[] = [
   {
@@ -49,7 +49,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ filter, onFilterChange }) => {
   useEffect(() => {
     const loadProjects = async () => {
       const saved = await db.getItem('jydesign_projects');
-      if (saved) {
+      if (saved && Array.isArray(saved) && saved.length > 0) {
         setProjects(saved);
       } else {
         setProjects(INITIAL_PROJECTS);
@@ -92,73 +92,35 @@ const Portfolio: React.FC<PortfolioProps> = ({ filter, onFilterChange }) => {
               </button>
             ))}
           </div>
-
           <p className="text-gray-500 font-light max-w-2xl leading-relaxed text-lg">
-            공간은 그 자체로 브랜드의 언어가 됩니다. JYDESIGN이 제안하는 <br className="hidden md:block" />
-            감도 높은 디자인 포트폴리오를 경험해보세요.
+            공간은 그 자체로 브랜드의 언어가 됩니다. JYDESIGN이 제안하는 감도 높은 디자인 포트폴리오를 경험해보세요.
           </p>
         </header>
 
-        {/* 프로젝트 상세 보기 모달 */}
         {selectedProject && (
           <div className="fixed inset-0 z-[110] bg-black flex items-center justify-center animate-fadeIn">
-            <button 
-              onClick={() => setSelectedProject(null)}
-              className="absolute top-8 left-8 md:left-32 z-[120] w-14 h-14 bg-white text-black rounded-full shadow-2xl flex items-center justify-center hover:bg-gray-100 transition-all group scale-100 active:scale-90"
-              aria-label="Back to list"
-            >
-              <ArrowLeft size={24} className="group-hover:-translate-x-1 transition-transform" />
-            </button>
-
-            <button 
-              onClick={() => setSelectedProject(null)}
-              className="absolute top-8 right-8 z-[120] w-14 h-14 bg-white/10 text-white rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
-            >
-              <X size={24} />
-            </button>
-
+            <button onClick={() => setSelectedProject(null)} className="absolute top-8 left-8 md:left-32 z-[120] w-14 h-14 bg-white text-black rounded-full shadow-2xl flex items-center justify-center hover:bg-gray-100 transition-all group scale-100 active:scale-90"><ArrowLeft size={24} className="group-hover:-translate-x-1 transition-transform" /></button>
+            <button onClick={() => setSelectedProject(null)} className="absolute top-8 right-8 z-[120] w-14 h-14 bg-white/10 text-white rounded-full flex items-center justify-center hover:bg-white/20 transition-all"><X size={24} /></button>
             <div className="relative w-full h-full flex flex-col md:flex-row items-center">
               <div className="relative flex-1 w-full h-full flex items-center justify-center p-4 md:p-12">
-                <img 
-                  src={selectedProject.images[currentImageIndex]} 
-                  alt={selectedProject.title}
-                  className="max-w-full max-h-full object-contain shadow-2xl transition-all duration-700 ease-in-out"
-                />
-
+                <img src={selectedProject.images[currentImageIndex]} alt={selectedProject.title} className="max-w-full max-h-full object-contain shadow-2xl transition-all duration-700 ease-in-out" />
                 {selectedProject.images.length > 1 && (
                   <>
-                    <button 
-                      onClick={() => setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : selectedProject.images.length - 1))}
-                      className="absolute left-4 md:left-12 p-4 text-white/30 hover:text-white transition-colors"
-                    >
-                      <ChevronLeft size={48} />
-                    </button>
-                    <button 
-                      onClick={() => setCurrentImageIndex((prev) => (prev < selectedProject.images.length - 1 ? prev + 1 : 0))}
-                      className="absolute right-4 md:right-12 p-4 text-white/30 hover:text-white transition-colors"
-                    >
-                      <ChevronRight size={48} />
-                    </button>
+                    <button onClick={() => setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : selectedProject.images.length - 1))} className="absolute left-4 md:left-12 p-4 text-white/30 hover:text-white transition-colors"><ChevronLeft size={48} /></button>
+                    <button onClick={() => setCurrentImageIndex((prev) => (prev < selectedProject.images.length - 1 ? prev + 1 : 0))} className="absolute right-4 md:right-12 p-4 text-white/30 hover:text-white transition-colors"><ChevronRight size={48} /></button>
                   </>
                 )}
               </div>
-
               <div className="w-full md:w-[450px] bg-white h-auto md:h-full p-8 md:p-16 flex flex-col justify-center border-l border-gray-100">
                 <span className="text-xs tracking-[0.3em] text-gray-400 uppercase mb-4 font-bold">{selectedProject.category}</span>
                 <h3 className="text-3xl md:text-4xl font-bold mb-8 uppercase tracking-tighter leading-none">{selectedProject.title}</h3>
                 <div className="w-12 h-px bg-gray-200 mb-8"></div>
-                <p className="text-gray-500 font-light leading-relaxed mb-12">
-                  {selectedProject.description}
-                </p>
+                <p className="text-gray-500 font-light leading-relaxed mb-12">{selectedProject.description}</p>
                 <div className="mt-auto">
                   <p className="text-[10px] text-gray-300 tracking-widest uppercase mb-4">Image {currentImageIndex + 1} of {selectedProject.images.length}</p>
                   <div className="flex gap-2">
                     {selectedProject.images.map((_, idx) => (
-                      <button 
-                        key={idx} 
-                        onClick={() => setCurrentImageIndex(idx)}
-                        className={`h-1 transition-all duration-500 ${idx === currentImageIndex ? 'w-12 bg-black' : 'w-4 bg-gray-200'}`}
-                      />
+                      <button key={idx} onClick={() => setCurrentImageIndex(idx)} className={`h-1 transition-all duration-500 ${idx === currentImageIndex ? 'w-12 bg-black' : 'w-4 bg-gray-200'}`} />
                     ))}
                   </div>
                 </div>
@@ -167,43 +129,24 @@ const Portfolio: React.FC<PortfolioProps> = ({ filter, onFilterChange }) => {
           </div>
         )}
 
-        {/* 리스트 그리드 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
           {filteredProjects.map(project => (
-            <div 
-              key={project.id} 
-              className="group relative bg-white cursor-pointer"
-              onClick={() => openDetail(project)}
-            >
+            <div key={project.id} className="group relative bg-white cursor-pointer" onClick={() => openDetail(project)}>
               <div className="aspect-[3/4] overflow-hidden mb-6 relative bg-gray-50">
-                <img 
-                  src={project.images[0]} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"
-                />
-                
+                <img src={project.images[0]} alt={project.title} className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                   <div className="bg-white/95 p-5 rounded-full text-black transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-xl">
-                      <Maximize2 size={24} strokeWidth={1.5} />
-                   </div>
+                   <div className="bg-white/95 p-5 rounded-full text-black transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-xl"><Maximize2 size={24} strokeWidth={1.5} /></div>
                 </div>
-
-                <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur px-4 py-2 text-[10px] tracking-widest uppercase font-bold text-black border border-gray-100">
-                  {project.images.length} SERIES
-                </div>
+                <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur px-4 py-2 text-[10px] tracking-widest uppercase font-bold text-black border border-gray-100">{project.images.length} SERIES</div>
               </div>
-
               <div className="px-1">
                 <span className="text-[9px] tracking-[0.4em] text-gray-300 uppercase mb-3 block font-bold">{project.category}</span>
                 <h3 className="text-2xl font-bold mb-4 group-hover:text-gray-400 transition-colors uppercase tracking-tighter">{project.title}</h3>
-                <p className="text-gray-400 font-light text-sm leading-relaxed line-clamp-2 italic">
-                  {project.description}
-                </p>
+                <p className="text-gray-400 font-light text-sm leading-relaxed line-clamp-2 italic">{project.description}</p>
               </div>
             </div>
           ))}
         </div>
-
         {filteredProjects.length === 0 && (
           <div className="py-60 text-center">
             <p className="text-gray-200 font-light text-2xl uppercase tracking-[0.2em]">검색된 프로젝트가 없습니다.</p>
