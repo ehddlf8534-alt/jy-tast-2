@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-import { AboutData } from '../types';
-import { INITIAL_ABOUT_DATA } from '../constants';
-import * as db from '../db';
+import { AboutData } from '../types.ts';
+import { INITIAL_ABOUT_DATA } from '../constants.ts';
+import * as db from '../db.ts';
 import { MoveRight } from 'lucide-react';
 
 const About: React.FC = () => {

@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Plus, Trash2, Image as ImageIcon, X, LogIn, Lock, Save, Layout, Grid, Info, UserCheck, Loader2, Edit2, Upload } from 'lucide-react';
-import { PortfolioProject, SectionData, CompanyInfo, AboutData } from '../types';
-import { INITIAL_SECTIONS, INITIAL_COMPANY_INFO, INITIAL_ABOUT_DATA } from '../constants';
-import * as db from '../db';
+import { PortfolioProject, SectionData, CompanyInfo, AboutData } from '../types.ts';
+import { INITIAL_SECTIONS, INITIAL_COMPANY_INFO, INITIAL_ABOUT_DATA } from '../constants.ts';
+import * as db from '../db.ts';
 
 const ADMIN_PASSWORD = "2026";
 
