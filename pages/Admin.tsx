@@ -483,6 +483,39 @@ const Admin: React.FC = () => {
                   className="w-full border-b border-gray-100 py-2 outline-none focus:border-black font-medium"
                 />
               </div>
+              <div className="md:col-span-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 block mb-2">오시는길 설명 (상단)</label>
+                <textarea 
+                  value={companyInfo.locationDescription}
+                  onChange={(e) => setCompanyInfo({...companyInfo, locationDescription: e.target.value})}
+                  className="w-full border border-gray-100 p-3 h-24 resize-none outline-none focus:border-black text-sm"
+                />
+              </div>
+              <div className="md:col-span-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 block mb-2">오시는길 설명 (주소 하단)</label>
+                <input 
+                  type="text" 
+                  value={companyInfo.locationSubDescription}
+                  onChange={(e) => setCompanyInfo({...companyInfo, locationSubDescription: e.target.value})}
+                  className="w-full border-b border-gray-100 py-2 outline-none focus:border-black font-medium"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 block mb-2">영업시간 (줄바꿈 가능)</label>
+                <textarea 
+                  value={companyInfo.businessHours}
+                  onChange={(e) => setCompanyInfo({...companyInfo, businessHours: e.target.value})}
+                  className="w-full border border-gray-100 p-3 h-24 resize-none outline-none focus:border-black text-sm"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 block mb-2">주차안내 (줄바꿈 가능)</label>
+                <textarea 
+                  value={companyInfo.parkingInfo}
+                  onChange={(e) => setCompanyInfo({...companyInfo, parkingInfo: e.target.value})}
+                  className="w-full border border-gray-100 p-3 h-24 resize-none outline-none focus:border-black text-sm"
+                />
+              </div>
             </div>
             <button 
               onClick={saveCompanyInfo}

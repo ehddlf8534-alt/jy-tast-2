@@ -8,7 +8,11 @@ export const INITIAL_COMPANY_INFO: CompanyInfo = {
   callCenter: "02-576-0000",
   businessLicense: "000-00-00000",
   address: "강원특별자치도 강릉시 포남동 630-3",
-  mapUrl: "https://map.naver.com/p?c=18.35,0,0,0,dh"
+  mapUrl: "https://map.naver.com/p?c=18.35,0,0,0,dh",
+  locationDescription: "제이와이디자인의 공간은 당신의 꿈이 현실이 되는 시작점입니다. 차별화된 감각과 전문성이 공존하는 저희 스튜디오로 초대합니다.",
+  locationSubDescription: "강릉의 중심, 포남동에 위치한 제이와이디자인 스튜디오입니다.",
+  businessHours: "평일 09:00 - 18:00\n토요일 10:00 - 15:00\n일요일 및 공휴일 휴무",
+  parkingInfo: "건물 전용 주차장 이용 가능\n방문 전 미리 연락 주시면 주차 공간을 확보해 드립니다."
 };
 
 export const INITIAL_ABOUT_DATA: AboutData = {

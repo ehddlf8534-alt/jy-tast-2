@@ -25,7 +25,7 @@ const Location: React.FC<LocationProps> = ({ info }) => {
             </div>
             <div className="max-w-xs">
               <p className="text-sm text-gray-400 font-light leading-relaxed">
-                제이와이디자인의 공간은 당신의 꿈이 현실이 되는 시작점입니다. 차별화된 감각과 전문성이 공존하는 저희 스튜디오로 초대합니다.
+                {info.locationDescription}
               </p>
             </div>
           </div>
@@ -42,7 +42,7 @@ const Location: React.FC<LocationProps> = ({ info }) => {
                   <span className="text-[10px] font-bold tracking-widest text-gray-400 uppercase">Office Address</span>
                 </div>
                 <h3 className="text-3xl md:text-4xl font-bold tracking-tighter leading-tight mb-4">{info.address}</h3>
-                <p className="text-gray-400 text-sm font-light">강릉의 중심, 포남동에 위치한 제이와이디자인 스튜디오입니다.</p>
+                <p className="text-gray-400 text-sm font-light">{info.locationSubDescription}</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8 border-t border-gray-50">
                 <div className="space-y-2">
@@ -59,12 +59,12 @@ const Location: React.FC<LocationProps> = ({ info }) => {
               <div className="p-8 bg-gray-50 rounded-sm space-y-4 hover:bg-black group transition-all duration-500">
                 <Clock className="text-black group-hover:text-white transition-colors" size={24} />
                 <h5 className="font-bold text-sm group-hover:text-white transition-colors uppercase">Business Hours</h5>
-                <p className="text-xs text-gray-400 leading-relaxed group-hover:text-gray-300">평일 09:00 - 18:00<br/>토요일 10:00 - 15:00<br/>일요일 및 공휴일 휴무</p>
+                <p className="text-xs text-gray-400 leading-relaxed group-hover:text-gray-300 whitespace-pre-line">{info.businessHours}</p>
               </div>
               <div className="p-8 bg-gray-50 rounded-sm space-y-4 hover:bg-black group transition-all duration-500">
                 <Car className="text-black group-hover:text-white transition-colors" size={24} />
                 <h5 className="font-bold text-sm group-hover:text-white transition-colors uppercase">Parking Info</h5>
-                <p className="text-xs text-gray-400 leading-relaxed group-hover:text-gray-300">건물 전용 주차장 이용 가능<br/>방문 전 미리 연락 주시면 주차 공간을 확보해 드립니다.</p>
+                <p className="text-xs text-gray-400 leading-relaxed group-hover:text-gray-300 whitespace-pre-line">{info.parkingInfo}</p>
               </div>
             </div>
           </div>

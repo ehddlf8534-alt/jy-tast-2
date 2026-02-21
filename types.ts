@@ -16,6 +16,10 @@ export interface CompanyInfo {
   businessLicense: string;
   address: string;
   mapUrl?: string;
+  locationDescription?: string;
+  locationSubDescription?: string;
+  businessHours?: string;
+  parkingInfo?: string;
 }
 
 export interface AboutData {
