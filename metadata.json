@@ -1,6 +1,6 @@
 {
   "name": "JYDESIGN - 인테리어 전문 기업",
-  "description": "JYDESIGN의 공식 웹사이트입니다. 병원, 상업공간, 주거공간 인테리어 디자인 전문 기업으로서 고유의 감각과 전문성을 담은 포트폴리오와 서비스를 제공합니다.",
+  "description": "JYDESIGN의 공식 웹사이트입니다. 주거공간, 상업공간 인테리어 디자인 전문 기업으로서 고유의 감각과 전문성을 담은 포트폴리오와 서비스를 제공합니다.",
   "requestFramePermissions": [
     "geolocation"
   ]

@@ -85,12 +85,12 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate, currentView }) => {
                       handleNav(item.view);
                     }
                   }}
-                  className={`text-4xl md:text-7xl font-black transition-all duration-500 text-left uppercase tracking-tighter hover:tracking-normal ${currentView === item.view && !activeSubMenu ? 'text-black' : 'text-black/20 hover:text-black'}`}
+                  className={`text-3xl md:text-5xl font-black transition-all duration-500 text-left uppercase tracking-tighter hover:tracking-normal ${currentView === item.view && !activeSubMenu ? 'text-black' : 'text-black/20 hover:text-black'}`}
                 >
                   {item.label}
                 </button>
                 {item.subItems && (
-                  <div className={`mt-6 space-y-4 overflow-hidden transition-all duration-500 ${activeSubMenu === item.label ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <div className={`space-y-4 overflow-hidden transition-all duration-500 ${activeSubMenu === item.label ? 'mt-6 max-h-80 opacity-100' : 'mt-0 max-h-0 opacity-0'}`}>
                     {item.subItems.map(sub => (
                       <button 
                         key={sub.label} 
