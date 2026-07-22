@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Plus, Trash2, Image as ImageIcon, X, LogIn, Lock, Save, Layout, Grid, Info, UserCheck, Loader2, Edit2, Upload } from 'lucide-react';
 import { PortfolioProject, SectionData, CompanyInfo, AboutData } from '../types.ts';
-import { INITIAL_SECTIONS, INITIAL_COMPANY_INFO, INITIAL_ABOUT_DATA } from '../constants.ts';
+import { INITIAL_SECTIONS, INITIAL_COMPANY_INFO, INITIAL_ABOUT_DATA, INITIAL_PROJECTS } from '../constants.ts';
 import * as db from '../db.ts';
 
 const ADMIN_PASSWORD = "2026";
@@ -35,7 +35,11 @@ const Admin: React.FC = () => {
   useEffect(() => {
     const loadAllData = async () => {
       const savedProjects = await db.getItem('jydesign_projects');
-      if (savedProjects) setProjects(savedProjects);
+      if (savedProjects && Array.isArray(savedProjects) && savedProjects.length > 0) {
+        setProjects(savedProjects);
+      } else {
+        setProjects(INITIAL_PROJECTS);
+      }
       
       const savedSections = await db.getItem('jydesign_sections');
       if (savedSections) setSections(savedSections);
@@ -165,6 +169,13 @@ const Admin: React.FC = () => {
     }));
   };
 
+  const saveProjects = async () => {
+    setIsSaving(true);
+    await db.setItem('jydesign_projects', projects);
+    setIsSaving(false);
+    alert('포트폴리오가 저장되었습니다.');
+  };
+
   const saveMainSections = async () => {
     setIsSaving(true);
     await db.setItem('jydesign_sections', sections);
@@ -268,6 +279,14 @@ const Admin: React.FC = () => {
                 </div>
               ))}
             </div>
+
+            <button 
+              onClick={saveProjects}
+              disabled={isSaving}
+              className="w-full py-5 bg-black text-white font-bold tracking-[0.2em] uppercase hover:bg-neutral-800 disabled:bg-gray-400 flex items-center justify-center gap-2"
+            >
+              {isSaving ? <Loader2 className="animate-spin" size={20} /> : <Save size={20} />} 포트폴리오 저장
+            </button>
           </div>
         )}
 

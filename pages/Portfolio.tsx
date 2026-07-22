@@ -2,39 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight, Maximize2, Filter, ArrowLeft } from 'lucide-react';
 import { PortfolioProject } from '../types.ts';
+import { INITIAL_PROJECTS } from '../constants.ts';
 import * as db from '../db.ts';
-
-const INITIAL_PROJECTS: PortfolioProject[] = [
-  {
-    id: '1',
-    title: 'Modern Clinic A',
-    category: '상가 인테리어',
-    description: '환자와 의료진 모두를 위한 치유의 공간 디자인입니다. 차분한 톤의 마감재와 자연 채광을 극대화하여 병원 특유의 긴장감을 완화시켰습니다.',
-    images: [
-      'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1200'
-    ]
-  },
-  {
-    id: '2',
-    title: 'Cafe Minimalist',
-    category: '상가 인테리어',
-    description: '여백의 미를 강조한 미니멀리즘 상업 공간입니다. 가구의 배치를 최소화하고 조형미가 돋보이는 오브제를 배치하여 브랜드의 정체성을 강조했습니다.',
-    images: [
-      'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1559925393-8be0ec41b50d?auto=format&fit=crop&q=80&w=1200'
-    ]
-  },
-  {
-    id: '3',
-    title: 'Premium Penthouse',
-    category: '주거 인테리어',
-    description: '고급스러운 자재와 세련된 조명 설계로 완성된 프리미엄 주거 공간입니다. 거주자의 라이프스타일을 반영한 맞춤형 레이아웃을 제안합니다.',
-    images: [
-      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200'
-    ]
-  }
-];
 
 interface PortfolioProps {
   filter?: string;
