@@ -11,8 +11,8 @@ const About: React.FC = () => {
   useEffect(() => {
     const loadAbout = async () => {
       const saved = await db.getItem('jydesign_about');
-      if (saved) {
-        setData(saved);
+      if (saved && typeof saved === 'object') {
+        setData({ ...INITIAL_ABOUT_DATA, ...saved });
       }
     };
     loadAbout();

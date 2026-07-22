@@ -30,8 +30,8 @@ const App: React.FC = () => {
         }
         
         const savedInfo = await db.getItem('jydesign_info');
-        if (savedInfo) {
-          setCompanyInfo(savedInfo);
+        if (savedInfo && typeof savedInfo === 'object') {
+          setCompanyInfo({ ...INITIAL_COMPANY_INFO, ...savedInfo });
         }
       } catch (e) {
         console.error("Data loading error:", e);

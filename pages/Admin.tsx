@@ -46,10 +46,18 @@ const Admin: React.FC = () => {
       else setSections(INITIAL_SECTIONS);
 
       const savedInfo = await db.getItem('jydesign_info');
-      if (savedInfo) setCompanyInfo(savedInfo);
+      if (savedInfo && typeof savedInfo === 'object') {
+        setCompanyInfo({ ...INITIAL_COMPANY_INFO, ...savedInfo });
+      } else {
+        setCompanyInfo(INITIAL_COMPANY_INFO);
+      }
 
       const savedAbout = await db.getItem('jydesign_about');
-      if (savedAbout) setAboutData(savedAbout);
+      if (savedAbout && typeof savedAbout === 'object') {
+        setAboutData({ ...INITIAL_ABOUT_DATA, ...savedAbout });
+      } else {
+        setAboutData(INITIAL_ABOUT_DATA);
+      }
     };
     loadAllData();
   }, []);
@@ -185,14 +193,18 @@ const Admin: React.FC = () => {
 
   const saveAboutData = async () => {
     setIsSaving(true);
-    await db.setItem('jydesign_about', aboutData);
+    const fullAbout = { ...INITIAL_ABOUT_DATA, ...aboutData };
+    await db.setItem('jydesign_about', fullAbout);
+    setAboutData(fullAbout);
     setIsSaving(false);
     alert('회사 소개 정보가 저장되었습니다.');
   };
 
   const saveCompanyInfo = async () => {
     setIsSaving(true);
-    await db.setItem('jydesign_info', companyInfo);
+    const fullInfo = { ...INITIAL_COMPANY_INFO, ...companyInfo };
+    await db.setItem('jydesign_info', fullInfo);
+    setCompanyInfo(fullInfo);
     setIsSaving(false);
     alert('기업 정보가 저장되었습니다.');
   };
